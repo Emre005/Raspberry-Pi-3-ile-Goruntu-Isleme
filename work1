@@ -1,0 +1,34 @@
+import cv2
+import numpy as np
+import os
+ 
+###################################################################################################
+def main():
+    imgOriginal = cv2.imread("image.jpg")               # resim aç
+ 
+    if imgOriginal is None:                             # eğer resim mevcut değilse
+        print( "hata : resim bulunamadi \n\n")        # hata
+        os.system("pause")                                  # kullanıcı hata mesajını görebilmesi için
+        return                                              # main fornksiyonundan çıkış programı bitir.
+    # end if
+ 
+    imgGrayscale = cv2.cvtColor(imgOriginal, cv2.COLOR_BGR2GRAY)        # grayscale dönüştür
+ 
+    imgBlurred = cv2.GaussianBlur(imgGrayscale, (5, 5), 0)              # blur
+ 
+    imgCanny = cv2.Canny(imgBlurred, 100, 200)                          # Canny edges
+ 
+    
+ 
+    cv2.imshow("imgOriginal", imgOriginal)         # resimleri göster
+    cv2.imshow("imgCanny", imgCanny)
+ 
+    cv2.waitKey()                               #klavyeden bir tuşa balılıncaya kadar bekle
+ 
+    cv2.destroyAllWindows()                     # bütün pencereleri kapat
+ 
+    return
+ 
+###################################################################################################
+if __name__ == "__main__":
+    main()
